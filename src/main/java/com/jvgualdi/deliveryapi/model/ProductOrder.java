@@ -6,10 +6,12 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-public class Order {
+public class ProductOrder {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "order_seq", sequenceName = "ID_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_seq")
+    @Column(name = "ID")
     private Integer id;
 
     //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -20,17 +22,17 @@ public class Order {
     private String description;
 
     @Column(name = "sub_total", nullable = false)
-    private BigDecimal subTotal;
+    private double subTotal;
 
     @Column(nullable = false)
-    private BigDecimal total;
+    private double total;
 
-    @OneToOne(mappedBy = "order")
+    @OneToOne(mappedBy = "productOrder")
     private Delivery delivery;
 
-//    @ManyToOne
-//    @JoinColumn(name = "customerOrder_fkey", referencedColumnName = "id")
-//    private Customer customer;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    private Customer customer;
 
 
     public Integer getId() {
@@ -57,20 +59,8 @@ public class Order {
         this.description = description;
     }
 
-    public BigDecimal getSubTotal() {
+    public double getSubTotal() {
         return subTotal;
-    }
-
-    public void setSubTotal(BigDecimal subTotal) {
-        this.subTotal = subTotal;
-    }
-
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
     }
 
     public Delivery getDelivery() {
@@ -80,4 +70,25 @@ public class Order {
     public void setDelivery(Delivery delivery) {
         this.delivery = delivery;
     }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public void setSubTotal(double subTotal) {
+        this.subTotal = subTotal;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
 }

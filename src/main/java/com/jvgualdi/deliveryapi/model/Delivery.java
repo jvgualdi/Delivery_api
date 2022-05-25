@@ -8,19 +8,21 @@ import java.time.LocalDateTime;
 public class Delivery {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "delivery_seq", sequenceName = "ID_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "delivery_seq")
+    @Column(name = "ID")
     private Integer id;
 
     @Column(name = "delivery_tax")
-    private BigDecimal tax;
+    private double tax;
 
     //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(nullable = false)
     private LocalDateTime timeDelivered;
 
     @OneToOne
-    @JoinColumn(name = "order_number", referencedColumnName = "id")
-    private Order order;
+    @JoinColumn(name = "request_number", referencedColumnName = "id")
+    private ProductOrder productOrder;
 
     @Embedded
     private Location address;
@@ -33,12 +35,20 @@ public class Delivery {
         this.id = id;
     }
 
-    public BigDecimal getTax() {
+    public double getTax() {
         return tax;
     }
 
-    public void setTax(BigDecimal tax) {
+    public void setTax(double tax) {
         this.tax = tax;
+    }
+
+    public ProductOrder getProductOrder() {
+        return productOrder;
+    }
+
+    public void setProductOrder(ProductOrder productOrder) {
+        this.productOrder = productOrder;
     }
 
     public LocalDateTime getTimeDelivered() {
@@ -47,14 +57,6 @@ public class Delivery {
 
     public void setTimeDelivered(LocalDateTime timeDelivered) {
         this.timeDelivered = timeDelivered;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 
     public Location getAddress() {

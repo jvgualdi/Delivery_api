@@ -7,7 +7,9 @@ import java.util.List;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "customer_seq", sequenceName = "ID_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_seq")
+    @Column(name = "ID")
     private Integer id;
 
     @Column(length = 80, name = "customer_name", nullable = false)
@@ -24,9 +26,8 @@ public class Customer {
     @Embedded
     private Location address;
 
-//    @OneToMany(targetEntity = Order.class, cascade = CascadeType.ALL)
-//    private List<Order> allOrders;
-
+    @OneToMany(targetEntity = ProductOrder.class, cascade = CascadeType.ALL)
+    private List<ProductOrder> allOrders;
 
     public Integer getId() {
         return id;
@@ -74,5 +75,13 @@ public class Customer {
 
     public void setAddress(Location address) {
         this.address = address;
+    }
+
+    public List<ProductOrder> getAllOrders() {
+        return allOrders;
+    }
+
+    public void setAllOrders(List<ProductOrder> allOrders) {
+        this.allOrders = allOrders;
     }
 }
