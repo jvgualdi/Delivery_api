@@ -3,9 +3,10 @@ package com.jvgualdi.deliveryapi.model;
 
 public enum OrderStatus {
 
-    REQUESTED,
+    ACCEPTED,
     PREPARING,
     OUT_DELIVERING,
-    DELIVERED;
+    DELIVERED,
+    CONCLUDED;
 
 }

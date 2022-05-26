@@ -27,12 +27,11 @@ public class ProductOrder {
     @Column(nullable = false)
     private double total;
 
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
     @OneToOne(mappedBy = "productOrder")
     private Delivery delivery;
-
-    @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    private Customer customer;
 
 
     public Integer getId() {
@@ -71,16 +70,17 @@ public class ProductOrder {
         this.delivery = delivery;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 
     public void setSubTotal(double subTotal) {
         this.subTotal = subTotal;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
     }
 
     public double getTotal() {

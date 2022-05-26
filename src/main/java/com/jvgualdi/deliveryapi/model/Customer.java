@@ -15,6 +15,7 @@ public class Customer {
     @Column(length = 80, name = "customer_name", nullable = false)
     private String name;
 
+    @Column
     private String phoneNumber;
 
     @Column(name = "customer_email", nullable = false)
@@ -26,7 +27,8 @@ public class Customer {
     @Embedded
     private Location address;
 
-    @OneToMany(targetEntity = ProductOrder.class, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = ProductOrder.class, cascade = CascadeType.ALL, orphanRemoval= true )
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private List<ProductOrder> allOrders;
 
     public Integer getId() {
