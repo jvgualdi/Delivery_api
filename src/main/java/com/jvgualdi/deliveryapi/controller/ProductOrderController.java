@@ -20,7 +20,7 @@ public class ProductOrderController {
     @Autowired
     public ProductOrderService productOrderService;
 
-    @PostMapping
+    @PostMapping()
     public void register (@RequestBody ProductOrderDTO productOrderDTO){
         productOrderService.save(productOrderDTO);
     }
@@ -30,14 +30,13 @@ public class ProductOrderController {
         return productOrderRepository.findAll();
     }
 
-    @DeleteMapping({"/id"})
-    public void deleteOrder (@PathVariable("id") Integer productOrderID){
+    @DeleteMapping("/{orderID}")
+    public void deleteOrder (@PathVariable("orderID") Integer productOrderID){
         productOrderRepository.deleteById(productOrderID);
     }
 
     @PutMapping
     public void updateOrder (@RequestBody ProductOrderDTO productOrderDTO){
-        productOrderService.save(productOrderDTO);
     }
 
 

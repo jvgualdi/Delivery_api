@@ -1,7 +1,9 @@
 package com.jvgualdi.deliveryapi.service;
 
 import com.jvgualdi.deliveryapi.dto.ProductOrderDTO;
+import com.jvgualdi.deliveryapi.model.Customer;
 import com.jvgualdi.deliveryapi.model.ProductOrder;
+import com.jvgualdi.deliveryapi.repository.CustomerRepository;
 import com.jvgualdi.deliveryapi.repository.ProductOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,9 @@ public class ProductOrderService {
     @Autowired
     public ProductOrderRepository productOrderRepository;
 
+    @Autowired
+    CustomerRepository customerRepository;
+
     public void save(ProductOrderDTO productOrderDTO) {
         ProductOrder productOrder = new ProductOrder();
 
@@ -23,6 +28,16 @@ public class ProductOrderService {
         productOrder.setTotal(productOrderDTO.getTotal());
         productOrder.setMomentRequested(LocalDateTime.now());
 
+       Customer customer = customerRepository.findById(productOrderDTO.getCustomerID()).orElse(null);
+       if(customer != null) {
+           productOrder.setCustomer(customer);
+       }
+
         productOrderRepository.save(productOrder);
     }
+
+
+//    public void delete(Integer orderID) {
+//        productOrderRepository.delete(productOrderRepository.findById(orderID).orElse(null));
+//    }
 }

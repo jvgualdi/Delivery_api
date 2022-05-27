@@ -7,8 +7,8 @@ import java.util.List;
 public class Customer {
 
     @Id
-    @SequenceGenerator(name = "customer_seq", sequenceName = "ID_SEQ")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_generator")
+    @SequenceGenerator(name = "customer_generator", sequenceName = "customer_seq")
     @Column(name = "ID")
     private Integer id;
 
@@ -18,18 +18,12 @@ public class Customer {
     @Column
     private String phoneNumber;
 
-    @Column(name = "customer_email", nullable = false)
-    private String email;
-
-    @Column(nullable = false)
-    private String password;
-
     @Embedded
     private Location address;
 
-    @OneToMany(targetEntity = ProductOrder.class, cascade = CascadeType.ALL, orphanRemoval= true )
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    private List<ProductOrder> allOrders;
+    @OneToMany(targetEntity = ProductOrder.class, cascade = CascadeType.ALL, orphanRemoval= true, mappedBy = "customer")
+    //@JoinColumn(name = "customer_id", referencedColumnName = "id")
+    private List<ProductOrder> productOrders;
 
     public Integer getId() {
         return id;
@@ -55,22 +49,6 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Location getAddress() {
         return address;
     }
@@ -80,10 +58,10 @@ public class Customer {
     }
 
     public List<ProductOrder> getAllOrders() {
-        return allOrders;
+        return productOrders;
     }
 
     public void setAllOrders(List<ProductOrder> allOrders) {
-        this.allOrders = allOrders;
+        this.productOrders = allOrders;
     }
 }

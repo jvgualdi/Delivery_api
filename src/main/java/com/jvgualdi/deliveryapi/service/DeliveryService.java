@@ -17,10 +17,14 @@ public class DeliveryService {
 
     public void save(DeliveryDTO deliveryDTO) {
         Delivery delivery = new Delivery();
-        delivery.setAddress(deliveryDTO.getAddress());
         delivery.setTax(deliveryDTO.getTax());
         delivery.setTimeDelivered(LocalDateTime.now());
 
         deliveryRepository.save(delivery);
     }
+
+
+//    public void delete(Integer deliveryID) {
+//        deliveryRepository.delete(deliveryRepository.findById(deliveryID).orElse(null));
+//    }
 }

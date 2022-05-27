@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 public class ProductOrder {
 
     @Id
-    @SequenceGenerator(name = "order_seq", sequenceName = "ID_SEQ")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_generator")
+    @SequenceGenerator(name = "order_generator", sequenceName = "order_seq")
     @Column(name = "ID")
     private Integer id;
 
@@ -32,6 +32,9 @@ public class ProductOrder {
 
     @OneToOne(mappedBy = "productOrder")
     private Delivery delivery;
+
+    @ManyToOne
+    private Customer customer;
 
 
     public Integer getId() {
@@ -91,4 +94,11 @@ public class ProductOrder {
         this.total = total;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }

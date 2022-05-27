@@ -15,15 +15,14 @@ public class CustomerService {
     public void save (CustomerDTO customerDTO){
         Customer customer = new Customer();
 
-        customer.setEmail(customerDTO.getEmail());
         customer.setName(customerDTO.getName());
-        customer.setPassword(customerDTO.getPassword());
         customer.setAddress(customerDTO.getAddress());
+        customer.setPhoneNumber(customerDTO.getPhoneNumber());
 
         customerRepository.save(customer);
     }
 
-    public void delete(Integer customerID) {
-        customerRepository.delete(customerRepository.findById(customerID).orElse(null));
-    }
+//    public void delete(Integer customerID) {
+//        customerRepository.delete(customerRepository.findById(customerID).orElse(null));
+//    }
 }

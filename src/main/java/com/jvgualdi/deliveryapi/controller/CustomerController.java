@@ -29,8 +29,8 @@ public class CustomerController {
         return customerRepository.findAll();
     }
 
-    @DeleteMapping(path = {"/id"})
-    public void delete (@PathVariable("id") Integer customerID){
+    @DeleteMapping("/{customerID}")
+    public void delete (@PathVariable("customerID") Integer customerID){
         customerRepository.deleteById(customerID);
     }
 

@@ -30,8 +30,8 @@ public class DeliveryController {
         return deliveryRepository.findAll();
     }
 
-    @DeleteMapping({"/id"})
-    public void delete (@PathVariable("id") Integer deliveryID){
+    @DeleteMapping("/{deliveryID}")
+    public void delete (@PathVariable("deliveryID") Integer deliveryID){
         deliveryRepository.deleteById(deliveryID);
     }
 //

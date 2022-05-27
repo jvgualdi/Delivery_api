@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 public class Delivery {
 
     @Id
-    @SequenceGenerator(name = "delivery_seq", sequenceName = "ID_SEQ")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "delivery_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "delivery_generator")
+    @SequenceGenerator(name = "delivery_generator", sequenceName = "delivery_seq")
     @Column(name = "ID")
     private Integer id;
 
@@ -24,8 +24,6 @@ public class Delivery {
     @JoinColumn(name = "request_number", referencedColumnName = "id")
     private ProductOrder productOrder;
 
-    @Embedded
-    private Location address;
 
     public Integer getId() {
         return id;
@@ -59,11 +57,4 @@ public class Delivery {
         this.timeDelivered = timeDelivered;
     }
 
-    public Location getAddress() {
-        return address;
-    }
-
-    public void setAddress(Location address) {
-        this.address = address;
-    }
 }
