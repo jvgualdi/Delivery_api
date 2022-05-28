@@ -5,9 +5,7 @@ import com.jvgualdi.deliveryapi.model.Location;
 public class CustomerDTO {
 
     private String name;
-
     private String phoneNumber;
-
     private Location address;
 
     public String getName() {

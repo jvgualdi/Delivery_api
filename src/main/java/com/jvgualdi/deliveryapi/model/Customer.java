@@ -1,5 +1,10 @@
 package com.jvgualdi.deliveryapi.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -57,11 +62,11 @@ public class Customer {
         this.address = address;
     }
 
-    public List<ProductOrder> getAllOrders() {
+    public List<ProductOrder> getProductOrders() {
         return productOrders;
     }
 
-    public void setAllOrders(List<ProductOrder> allOrders) {
-        this.productOrders = allOrders;
+    public void setProductOrders(List<ProductOrder> productOrders) {
+        this.productOrders = productOrders;
     }
 }

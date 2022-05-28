@@ -25,7 +25,7 @@ public class DeliveryController {
         deliveryService.save(deliveryDTO, order_ID);
     }
 
-    @GetMapping("/find-all")
+    @GetMapping("/")
     public List<Delivery> allDeliveries (){
         return deliveryRepository.findAll();
     }
@@ -34,9 +34,14 @@ public class DeliveryController {
     public void delete (@PathVariable("deliveryID") Integer deliveryID){
         deliveryRepository.deleteById(deliveryID);
     }
-//
-//    @PutMapping
-//    public void update (@RequestBody DeliveryDTO deliveryDTO){
-//        deliveryService.save(deliveryDTO);
-//    }
+
+    @PutMapping("/update/{deliveryID}")
+    public void update (@PathVariable("deliveryID") Integer deliveryID, @RequestBody DeliveryDTO deliveryDTO) throws Exception {
+        Delivery delivery = deliveryRepository.findById(deliveryID).orElse(null);
+        if (delivery != null){
+            deliveryService.update(delivery, deliveryDTO );
+        }else{
+            throw new Exception("Delivery not found");
+        }
+    }
 }

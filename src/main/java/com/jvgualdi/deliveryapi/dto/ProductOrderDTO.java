@@ -1,9 +1,8 @@
 package com.jvgualdi.deliveryapi.dto;
 
-import com.jvgualdi.deliveryapi.model.Delivery;
+
 import com.jvgualdi.deliveryapi.model.OrderStatus;
 
-import java.time.LocalDateTime;
 
 public class ProductOrderDTO {
 
@@ -43,5 +42,4 @@ public class ProductOrderDTO {
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
-
 }

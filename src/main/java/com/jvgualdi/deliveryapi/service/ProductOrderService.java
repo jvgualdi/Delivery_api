@@ -28,10 +28,19 @@ public class ProductOrderService {
         productOrder.setTotal(productOrderDTO.getTotal());
         productOrder.setMomentRequested(LocalDateTime.now());
 
-       Customer customer = customerRepository.findById(customerID).orElse(null);
-       if(customer != null) {
-           productOrder.setCustomer(customer);
-       }
+        Customer customer = customerRepository.findById(customerID).orElse(null);
+        if (customer != null) {
+            productOrder.setCustomer(customer);
+        }
+
+        productOrderRepository.save(productOrder);
+    }
+
+    public void update(ProductOrder productOrder, ProductOrderDTO productOrderDTO) {
+        productOrder.setStatus(productOrderDTO.getStatus());
+        productOrder.setTotal(productOrderDTO.getTotal());
+        productOrder.setSubTotal(productOrderDTO.getSubTotal());
+        productOrder.setDescription(productOrderDTO.getDescription());
 
         productOrderRepository.save(productOrder);
     }

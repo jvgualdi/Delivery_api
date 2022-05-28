@@ -1,6 +1,9 @@
 package com.jvgualdi.deliveryapi.model;
 
+import lombok.*;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -13,16 +16,19 @@ public class Delivery {
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "delivery_tax")
+    @Column(name = "delivery_tax", nullable = false)
     private double tax;
 
     //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Column(nullable = false)
+    @Column
     private LocalDateTime timeDelivered;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private DeliveryStatus deliveryStatus;
 
     @OneToOne
     private ProductOrder productOrder;
-
 
     public Integer getId() {
         return id;
@@ -40,14 +46,6 @@ public class Delivery {
         this.tax = tax;
     }
 
-    public ProductOrder getProductOrder() {
-        return productOrder;
-    }
-
-    public void setProductOrder(ProductOrder productOrder) {
-        this.productOrder = productOrder;
-    }
-
     public LocalDateTime getTimeDelivered() {
         return timeDelivered;
     }
@@ -56,4 +54,19 @@ public class Delivery {
         this.timeDelivered = timeDelivered;
     }
 
+    public DeliveryStatus getDeliveryStatus() {
+        return deliveryStatus;
+    }
+
+    public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
+    }
+
+    public ProductOrder getProductOrder() {
+        return productOrder;
+    }
+
+    public void setProductOrder(ProductOrder productOrder) {
+        this.productOrder = productOrder;
+    }
 }

@@ -1,7 +1,13 @@
 package com.jvgualdi.deliveryapi.model;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -18,7 +24,7 @@ public class ProductOrder {
     @Column(nullable = false)
     private LocalDateTime momentRequested;
 
-    @Column(length = 300)
+    @Column(length = 300, nullable = false)
     private String description;
 
     @Column(name = "sub_total", nullable = false)
@@ -28,6 +34,7 @@ public class ProductOrder {
     private double total;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private OrderStatus status;
 
     @OneToOne(mappedBy = "productOrder", targetEntity = Delivery.class, cascade = CascadeType.ALL, orphanRemoval= true)
@@ -35,7 +42,6 @@ public class ProductOrder {
 
     @ManyToOne
     private Customer customer;
-
 
     public Integer getId() {
         return id;
@@ -65,17 +71,16 @@ public class ProductOrder {
         return subTotal;
     }
 
-    public Delivery getDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(Delivery delivery) {
-        this.delivery = delivery;
-    }
-
-
     public void setSubTotal(double subTotal) {
         this.subTotal = subTotal;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     public OrderStatus getStatus() {
@@ -86,12 +91,12 @@ public class ProductOrder {
         this.status = status;
     }
 
-    public double getTotal() {
-        return total;
+    public Delivery getDelivery() {
+        return delivery;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
     }
 
     public Customer getCustomer() {

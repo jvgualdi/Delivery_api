@@ -12,12 +12,20 @@ public class CustomerService {
     @Autowired
     public CustomerRepository customerRepository;
 
-    public void save (CustomerDTO customerDTO){
+    public void save(CustomerDTO customerDTO) {
         Customer customer = new Customer();
 
         customer.setName(customerDTO.getName());
         customer.setAddress(customerDTO.getAddress());
         customer.setPhoneNumber(customerDTO.getPhoneNumber());
+
+        customerRepository.save(customer);
+    }
+
+    public void update(Customer customer, CustomerDTO customerDTO) {
+        customer.setPhoneNumber(customerDTO.getPhoneNumber());
+        customer.setName(customerDTO.getName());
+        customer.setAddress(customerDTO.getAddress());
 
         customerRepository.save(customer);
     }

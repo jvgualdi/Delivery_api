@@ -25,12 +25,12 @@ public class CustomerController {
         customerService.save(customerDTO);
     }
 
-    @GetMapping("/find-all")
+    @GetMapping("/")
     public List<Customer> findAll (){
         return customerRepository.findAll();
     }
 
-    @GetMapping("/customer/{customerID}")
+    @GetMapping("/{customerID}")
     public Optional<Customer> findCustomer (@PathVariable("customerID") Integer customerID){
         return customerRepository.findById(customerID);
     }
@@ -40,9 +40,14 @@ public class CustomerController {
         customerRepository.deleteById(customerID);
     }
 
-//    @PutMapping(path = {"/id"})
-//    public void update (@PathVariable Integer customerID){
-//        customerService.save(customerID);
-//    }
+    @PutMapping("/update/{customerID}")
+    public void update (@PathVariable("customerID") Integer customerID, @RequestBody CustomerDTO customerDTO) throws Exception{
+        Customer customer = customerRepository.findById(customerID).orElse(null);
+        if (customer != null){
+            customerService.update(customer, customerDTO);
+        }else{
+            throw new Exception("Customer not found");
+        }
+    }
 
 }

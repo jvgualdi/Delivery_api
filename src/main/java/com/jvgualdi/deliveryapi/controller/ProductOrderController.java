@@ -25,13 +25,13 @@ public class ProductOrderController {
         productOrderService.save(productOrderDTO, customerID);
     }
 
-    @GetMapping("/find-all")
+    @GetMapping("/")
     public List<ProductOrder> findAll(){
         return productOrderRepository.findAll();
     }
 
-    @GetMapping("/customer/{customer_id}")
-    public List<ProductOrder> findByCustomerID(@PathVariable("customer_did") Integer customerID){
+    @GetMapping("/{customer_id}")
+    public List<ProductOrder> findByCustomerID(@PathVariable("customer_id") Integer customerID){
         return productOrderRepository.findByCustomer(customerID);
     }
 
@@ -40,8 +40,14 @@ public class ProductOrderController {
         productOrderRepository.deleteById(productOrderID);
     }
 
-    @PutMapping
-    public void updateOrder (@RequestBody ProductOrderDTO productOrderDTO){
+    @PutMapping("/update/{orderID}")
+    public void updateOrder (@PathVariable("orderID") Integer orderID, @RequestBody ProductOrderDTO productOrderDTO) throws Exception {
+        ProductOrder productOrder = productOrderRepository.findById(orderID).orElse(null);
+        if (productOrder != null){
+            productOrderService.update(productOrder, productOrderDTO);
+        }else{
+            throw new Exception("Product order not Found");
+        }
     }
 
 
