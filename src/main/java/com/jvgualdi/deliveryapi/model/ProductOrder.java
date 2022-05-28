@@ -30,7 +30,7 @@ public class ProductOrder {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    @OneToOne(mappedBy = "productOrder")
+    @OneToOne(mappedBy = "productOrder", targetEntity = Delivery.class, cascade = CascadeType.ALL, orphanRemoval= true)
     private Delivery delivery;
 
     @ManyToOne

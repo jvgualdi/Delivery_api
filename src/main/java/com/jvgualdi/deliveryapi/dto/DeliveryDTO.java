@@ -9,7 +9,6 @@ public class DeliveryDTO {
 
     private double tax;
 
-
     public double getTax() {
         return tax;
     }
@@ -17,6 +16,5 @@ public class DeliveryDTO {
     public void setTax(double tax) {
         this.tax = tax;
     }
-
 
 }

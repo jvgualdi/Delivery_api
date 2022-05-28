@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/customers")
@@ -19,17 +20,22 @@ public class CustomerController {
     @Autowired
     public CustomerService customerService;
 
-    @PostMapping
+    @PostMapping("/register")
     public void register (@RequestBody CustomerDTO customerDTO){
         customerService.save(customerDTO);
     }
 
-    @GetMapping
+    @GetMapping("/find-all")
     public List<Customer> findAll (){
         return customerRepository.findAll();
     }
 
-    @DeleteMapping("/{customerID}")
+    @GetMapping("/select-customer/{customerID}")
+    public Optional<Customer> findCustomer (@PathVariable("customerID") Integer customerID){
+        return customerRepository.findById(customerID);
+    }
+
+    @DeleteMapping("/delete/{customerID}")
     public void delete (@PathVariable("customerID") Integer customerID){
         customerRepository.deleteById(customerID);
     }

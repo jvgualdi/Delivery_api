@@ -11,8 +11,6 @@ public class ProductOrderDTO {
     private double subTotal;
     private double total;
     private OrderStatus status;
-    private Integer customerID;
-
 
     public String getDescription() {
         return description;
@@ -46,11 +44,4 @@ public class ProductOrderDTO {
         this.status = status;
     }
 
-    public Integer getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(Integer customerID) {
-        this.customerID = customerID;
-    }
 }

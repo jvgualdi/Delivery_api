@@ -20,17 +20,17 @@ public class DeliveryController {
     @Autowired
     public DeliveryService deliveryService;
 
-    @PostMapping
-    public void register (@RequestBody DeliveryDTO deliveryDTO){
-        deliveryService.save(deliveryDTO);
+    @PostMapping("/register/{order_ID}")
+    public void register (@PathVariable("order_ID") Integer order_ID, @RequestBody DeliveryDTO deliveryDTO){
+        deliveryService.save(deliveryDTO, order_ID);
     }
 
-    @GetMapping
+    @GetMapping("/find-all")
     public List<Delivery> allDeliveries (){
         return deliveryRepository.findAll();
     }
 
-    @DeleteMapping("/{deliveryID}")
+    @DeleteMapping("/delete/{deliveryID}")
     public void delete (@PathVariable("deliveryID") Integer deliveryID){
         deliveryRepository.deleteById(deliveryID);
     }

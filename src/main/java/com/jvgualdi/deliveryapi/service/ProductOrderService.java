@@ -19,7 +19,7 @@ public class ProductOrderService {
     @Autowired
     CustomerRepository customerRepository;
 
-    public void save(ProductOrderDTO productOrderDTO) {
+    public void save(ProductOrderDTO productOrderDTO, Integer customerID) {
         ProductOrder productOrder = new ProductOrder();
 
         productOrder.setStatus(productOrderDTO.getStatus());
@@ -28,9 +28,11 @@ public class ProductOrderService {
         productOrder.setTotal(productOrderDTO.getTotal());
         productOrder.setMomentRequested(LocalDateTime.now());
 
-       Customer customer = customerRepository.findById(productOrderDTO.getCustomerID()).orElse(null);
+       Customer customer = customerRepository.findById(customerID).orElse(null);
        if(customer != null) {
            productOrder.setCustomer(customer);
+           customer.getAllOrders().add(productOrder);
+           customerRepository.save(customer);
        }
 
         productOrderRepository.save(productOrder);

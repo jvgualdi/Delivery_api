@@ -21,7 +21,6 @@ public class Delivery {
     private LocalDateTime timeDelivered;
 
     @OneToOne
-    @JoinColumn(name = "request_number", referencedColumnName = "id")
     private ProductOrder productOrder;
 
 

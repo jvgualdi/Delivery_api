@@ -20,17 +20,17 @@ public class ProductOrderController {
     @Autowired
     public ProductOrderService productOrderService;
 
-    @PostMapping()
-    public void register (@RequestBody ProductOrderDTO productOrderDTO){
-        productOrderService.save(productOrderDTO);
+    @PostMapping("/register/{customerID}")
+    public void register (@PathVariable("customerID") Integer customerID, @RequestBody ProductOrderDTO productOrderDTO){
+        productOrderService.save(productOrderDTO, customerID);
     }
 
-    @GetMapping
+    @GetMapping("/find-all")
     public List<ProductOrder> findAll(){
         return productOrderRepository.findAll();
     }
 
-    @DeleteMapping("/{orderID}")
+    @DeleteMapping("/delete/{orderID}")
     public void deleteOrder (@PathVariable("orderID") Integer productOrderID){
         productOrderRepository.deleteById(productOrderID);
     }
