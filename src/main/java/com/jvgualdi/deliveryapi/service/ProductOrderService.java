@@ -31,8 +31,6 @@ public class ProductOrderService {
        Customer customer = customerRepository.findById(customerID).orElse(null);
        if(customer != null) {
            productOrder.setCustomer(customer);
-           customer.getAllOrders().add(productOrder);
-           customerRepository.save(customer);
        }
 
         productOrderRepository.save(productOrder);
