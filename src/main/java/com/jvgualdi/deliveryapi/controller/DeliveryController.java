@@ -43,7 +43,7 @@ public class DeliveryController {
 //            throw new Exception("Order not found");
 //    }
 
-    @GetMapping("/")
+    @GetMapping("/list")
     public List<Delivery> findAll (){
         return deliveryRepository.findAll();
     }

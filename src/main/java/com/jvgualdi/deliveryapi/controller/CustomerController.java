@@ -25,7 +25,7 @@ public class CustomerController {
         customerService.save(customerDTO);
     }
 
-    @GetMapping("/")
+    @GetMapping("/list")
     public List<Customer> findAll (){
         return customerRepository.findAll();
     }

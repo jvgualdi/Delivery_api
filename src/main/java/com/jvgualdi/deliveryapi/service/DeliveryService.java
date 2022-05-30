@@ -59,7 +59,7 @@ public class DeliveryService {
 //    }
 
     public void update(Delivery delivery, DeliveryDTO deliveryDTO) {
-        ProductOrder productOrder = productOrderRepository.findById( delivery.getProductOrder().getId()).orElse(null);
+        ProductOrder productOrder = productOrderRepository.findById( delivery.getProductOrder().getId()).get();
 
         if (delivery.getTax() != deliveryDTO.getTax() && productOrder != null){
             delivery.setTax(deliveryDTO.getTax());

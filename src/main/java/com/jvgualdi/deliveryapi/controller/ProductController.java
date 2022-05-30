@@ -24,10 +24,9 @@ public class ProductController {
     @PostMapping("/register")
     public void register (@RequestBody Product product){
         productRepository.save(product);
-
     }
 
-    @GetMapping("/")
+    @GetMapping("/list")
     public List<Product> findAll(){
         return productRepository.findAll();
     }

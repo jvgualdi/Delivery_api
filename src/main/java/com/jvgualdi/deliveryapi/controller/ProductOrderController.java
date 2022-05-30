@@ -44,7 +44,7 @@ public class ProductOrderController {
         }
     }
 
-    @GetMapping("/")
+    @GetMapping("/list")
     public List<ProductOrder> findAll(){
         return productOrderRepository.findAll();
     }
