@@ -30,7 +30,4 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
-//    public void delete(Integer customerID) {
-//        customerRepository.delete(customerRepository.findById(customerID).orElse(null));
-//    }
 }

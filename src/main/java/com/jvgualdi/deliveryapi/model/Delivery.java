@@ -1,5 +1,8 @@
 package com.jvgualdi.deliveryapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -60,6 +63,7 @@ public class Delivery {
         this.deliveryStatus = deliveryStatus;
     }
 
+    @JsonBackReference
     public ProductOrder getProductOrder() {
         return productOrder;
     }

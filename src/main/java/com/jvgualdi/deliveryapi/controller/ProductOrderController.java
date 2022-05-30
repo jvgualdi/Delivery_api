@@ -1,7 +1,9 @@
 package com.jvgualdi.deliveryapi.controller;
 
 import com.jvgualdi.deliveryapi.dto.ProductOrderDTO;
+import com.jvgualdi.deliveryapi.model.Customer;
 import com.jvgualdi.deliveryapi.model.ProductOrder;
+import com.jvgualdi.deliveryapi.repository.CustomerRepository;
 import com.jvgualdi.deliveryapi.repository.ProductOrderRepository;
 import com.jvgualdi.deliveryapi.service.ProductOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,26 @@ public class ProductOrderController {
     @Autowired
     public ProductOrderService productOrderService;
 
-    @PostMapping("/register/{customer_id}")
-    public void register (@PathVariable("customer_id") Integer customerID, @RequestBody ProductOrderDTO productOrderDTO){
-        productOrderService.save(productOrderDTO, customerID);
+    @Autowired
+    public CustomerRepository customerRepository;
+
+//    @PostMapping("/register/{customer_id}")
+//    public void register (@PathVariable("customer_id") Integer customerID, @RequestBody ProductOrderDTO productOrderDTO) throws Exception {
+//        Customer customer = customerRepository.findById(customerID).orElse(null);
+//        if (productOrderDTO.getSubTotal() <= productOrderDTO.getTotal() && customer != null){
+//            productOrderService.save(productOrderDTO, customerID);
+//        }else {
+//            throw new Exception("Order could not be registered");
+//        }
+//    }
+
+    @PostMapping("/register")
+    public void register (@RequestBody ProductOrderDTO productOrderDTO) throws Exception {
+        if (productOrderDTO.getSubTotal() <= productOrderDTO.getTotal() && productOrderDTO.getCustomer() != null){
+            productOrderService.save(productOrderDTO);
+        }else {
+            throw new Exception("Order could not be registered");
+        }
     }
 
     @GetMapping("/")

@@ -1,7 +1,12 @@
 package com.jvgualdi.deliveryapi.dto;
 
 
+import com.jvgualdi.deliveryapi.model.Customer;
+import com.jvgualdi.deliveryapi.model.Delivery;
 import com.jvgualdi.deliveryapi.model.OrderStatus;
+import com.jvgualdi.deliveryapi.model.Product;
+
+import java.util.List;
 
 
 public class ProductOrderDTO {
@@ -10,6 +15,24 @@ public class ProductOrderDTO {
     private double subTotal;
     private double total;
     private OrderStatus status;
+    private List<Product> products;
+    private Customer customer;
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
     public String getDescription() {
         return description;

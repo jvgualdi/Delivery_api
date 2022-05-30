@@ -1,10 +1,12 @@
 package com.jvgualdi.deliveryapi.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class ProductOrder {
@@ -31,6 +33,9 @@ public class ProductOrder {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private OrderStatus status;
+
+    @Transient
+    private List<Product> products;
 
     @OneToOne(mappedBy = "productOrder", targetEntity = Delivery.class, cascade = CascadeType.ALL, orphanRemoval= true)
     private Delivery delivery;
@@ -86,6 +91,7 @@ public class ProductOrder {
         this.status = status;
     }
 
+    @JsonManagedReference
     public Delivery getDelivery() {
         return delivery;
     }
@@ -94,11 +100,20 @@ public class ProductOrder {
         this.delivery = delivery;
     }
 
+    @JsonBackReference
     public Customer getCustomer() {
         return customer;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

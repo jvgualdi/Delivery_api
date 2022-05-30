@@ -1,5 +1,8 @@
 package com.jvgualdi.deliveryapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -57,6 +60,7 @@ public class Customer {
         this.address = address;
     }
 
+    @JsonManagedReference
     public List<ProductOrder> getProductOrders() {
         return productOrders;
     }
