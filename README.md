@@ -4,10 +4,15 @@ Fora utilizado o Firebird 3.0.9 para sincronizar.
 
 Em caso de problemas devido o JWT impossibilitar o swagger ou impedir algum acesso, é preciso ignorar as classes e interfaces:
 data\UserDataDetail.java
+
 security\JWTValidationFilter.java
+
 security\JWTConfiguration.java
+
 security\JWTAuthentitactionFilter.java
+
 service\UserDetailServiceImplemented.java
+
 E adicionar ao lado da anotação @SpringBootApplication (exclude = {SecurityAutoConfiguration.class})
 
 Logo após, é possível criar um usuário e posteriormente ao habilitar as clasees e remover o que fora adicionado. Assim é possível utilizar o usuário criado para gerar um token e operar sobre as ações.
