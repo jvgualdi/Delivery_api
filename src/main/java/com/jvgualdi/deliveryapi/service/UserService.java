@@ -1,13 +1,12 @@
 package com.jvgualdi.deliveryapi.service;
 
-import com.jvgualdi.deliveryapi.model.User;
+import com.jvgualdi.deliveryapi.model.AppUser;
 import com.jvgualdi.deliveryapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Optional;
 
@@ -20,13 +19,13 @@ public class UserService {
     @Autowired
     public PasswordEncoder passwordEncoder;
 
-    public void save (User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+    public void save (AppUser appUser){
+        appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+        userRepository.save(appUser);
     }
 
-    public ResponseEntity<Boolean> login (String login, String password){
-        Optional<User> user = userRepository.findByLogin(login);
+    public ResponseEntity<Boolean> login (String username, String password){
+        Optional<AppUser> user = userRepository.findByUsername(username);
         if (!user.isPresent()){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
         }

@@ -1,6 +1,6 @@
 package com.jvgualdi.deliveryapi.data;
 
-import com.jvgualdi.deliveryapi.model.User;
+import com.jvgualdi.deliveryapi.model.AppUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,9 +10,9 @@ import java.util.Optional;
 
 public class UserDataDetail implements UserDetails {
 
-    private final Optional<User> user;
+    private final Optional<AppUser> user;
 
-    public UserDataDetail(Optional<User> user) {
+    public UserDataDetail(Optional<AppUser> user) {
         this.user = user;
     }
 
@@ -23,12 +23,12 @@ public class UserDataDetail implements UserDetails {
 
     @Override
     public String getPassword() {
-        return user.orElse(new User()).getPassword();
+        return user.orElse(new AppUser()).getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.orElse(new User()).getLogin();
+        return user.orElse(new AppUser()).getUsername();
     }
 
     @Override

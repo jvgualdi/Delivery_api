@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "userEntity")
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
@@ -14,15 +14,17 @@ public class User {
     private Integer id;
     private String name;
     @Column(unique = true)
-    private String login;
+    private String username;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-//    public User(String name, String login, String password) {
-//        this.name = name;
-//        this.login = login;
-//        this.password = password;
-//    }
+    public AppUser(String name, String username, String password) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+    }
+
+    public AppUser(){}
 
     public String getName() {
         return name;
@@ -32,12 +34,12 @@ public class User {
         this.name = name;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

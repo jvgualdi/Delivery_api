@@ -29,6 +29,7 @@ public class Delivery {
     private DeliveryStatus deliveryStatus;
 
     @OneToOne
+    @JoinColumn(unique = true, name = "order_id")
     private ProductOrder productOrder;
 
     public Integer getId() {

@@ -37,7 +37,7 @@ public class ProductOrder {
     @Transient
     private List<Product> products;
 
-    @OneToOne(mappedBy = "productOrder", targetEntity = Delivery.class, cascade = CascadeType.ALL, orphanRemoval= true)
+    @OneToOne(mappedBy = "productOrder", cascade = CascadeType.ALL, orphanRemoval= true)
     private Delivery delivery;
 
     @ManyToOne

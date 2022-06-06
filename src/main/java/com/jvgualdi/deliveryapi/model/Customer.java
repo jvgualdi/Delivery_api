@@ -25,7 +25,6 @@ public class Customer {
     private Location address;
 
     @OneToMany(targetEntity = ProductOrder.class, cascade = CascadeType.ALL, orphanRemoval= true, mappedBy = "customer")
-    //@JoinColumn(name = "customer_id", referencedColumnName = "id")
     private List<ProductOrder> productOrders;
 
     public Integer getId() {

@@ -1,11 +1,11 @@
 package com.jvgualdi.deliveryapi.repository;
 
-import com.jvgualdi.deliveryapi.model.User;
+import com.jvgualdi.deliveryapi.model.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository <User, Integer> {
+public interface UserRepository extends JpaRepository <AppUser, Integer> {
 
-    Optional<User> findByLogin(String login);
+    Optional<AppUser> findByUsername(String username);
 }

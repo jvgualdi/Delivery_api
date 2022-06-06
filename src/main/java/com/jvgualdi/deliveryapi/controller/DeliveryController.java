@@ -28,7 +28,7 @@ public class DeliveryController {
     @PostMapping("/register")
     public void register (@RequestBody DeliveryDTO deliveryDTO) throws Exception {
         ProductOrder productOrder = productOrderRepository.findById(deliveryDTO.getProductOrder().getId()).get();
-        if (productOrder.getDelivery() == null)
+        if (productOrder != null)
             deliveryService.save(deliveryDTO);
         else
             throw new Exception("Order could not be registered");

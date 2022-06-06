@@ -26,29 +26,29 @@ public class JWTValidationFilter extends BasicAuthenticationFilter {
         super(authenticationManager);
     }
 
+    //receives the every request and determines if the user has access
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String attribute = request.getHeader(HEADER_ATTRIBUTE);
 
         if (attribute == null || !attribute.startsWith(ATTRIBUTE_PREFIX)){
             chain.doFilter(request, response);
-            return;
+        }else {
+            String token = attribute.replace(ATTRIBUTE_PREFIX, "");
+            UsernamePasswordAuthenticationToken authenticationToken = getAuthenticationToken(token);
+
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            chain.doFilter(request, response);
         }
-
-        String token = attribute.replace(ATTRIBUTE_PREFIX, "");
-        UsernamePasswordAuthenticationToken authenticationToken = getAuthenticationToken(token);
-
-        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-        chain.doFilter(request, response);
     }
 
     private UsernamePasswordAuthenticationToken getAuthenticationToken(String token){
-        String user = JWT.require(Algorithm.HMAC512(JWTAuthentitactionFilter.PASSWORD_TOKEN)).build().verify(token).getSubject();
+        String username = JWT.require(Algorithm.HMAC512(JWTAuthentitactionFilter.PASSWORD_TOKEN)).build().verify(token).getSubject();
 
-        if (user == null){
+        if (username == null){
             return null;
         }
-
-        return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+        //We don't need the password, because the user has already been authenticated and the token is valid
+        return new UsernamePasswordAuthenticationToken(username, null, new ArrayList<>());
     }
 }
