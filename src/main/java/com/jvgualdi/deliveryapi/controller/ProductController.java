@@ -4,6 +4,7 @@ import com.jvgualdi.deliveryapi.dto.ProductDTO;
 import com.jvgualdi.deliveryapi.model.Product;
 import com.jvgualdi.deliveryapi.repository.ProductRepository;
 import com.jvgualdi.deliveryapi.service.ProductService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/products")
+@SecurityRequirement(name = "deliveryapi")
 public class ProductController {
 
 

@@ -4,6 +4,7 @@ import com.jvgualdi.deliveryapi.dto.CustomerDTO;
 import com.jvgualdi.deliveryapi.model.Customer;
 import com.jvgualdi.deliveryapi.repository.CustomerRepository;
 import com.jvgualdi.deliveryapi.service.CustomerService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/customers")
+@SecurityRequirement(name = "deliveryapi")
 public class CustomerController {
 
     @Autowired

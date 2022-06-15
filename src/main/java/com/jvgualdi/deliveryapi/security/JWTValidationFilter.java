@@ -2,6 +2,8 @@ package com.jvgualdi.deliveryapi.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.jvgualdi.deliveryapi.controller.UserController;
+import com.jvgualdi.deliveryapi.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -43,7 +45,7 @@ public class JWTValidationFilter extends BasicAuthenticationFilter {
     }
 
     private UsernamePasswordAuthenticationToken getAuthenticationToken(String token){
-        String username = JWT.require(Algorithm.HMAC512(JWTAuthentitactionFilter.PASSWORD_TOKEN)).build().verify(token).getSubject();
+        String username = JWT.require(Algorithm.HMAC512(UserService.PASSWORD_TOKEN)).build().verify(token).getSubject();
 
         if (username == null){
             return null;
